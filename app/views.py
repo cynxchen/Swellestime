@@ -8,14 +8,8 @@ from CRNinfoOrganizer import *
 @app.route('/')
 @app.route('/index')
 
-# allcourses = scrape.BrowserScraper().getAllCourses()
-
 def index():
     user = {'nickname': 'Cynthia'}  # fake user
-
-
-    # allcourses = scrape.BrowserScraper().getAllCourses()
-
     Matrix = [[ "-" for x in range(6)] for x in range(17)]
     Matrix[0][0] = "-"
     Matrix[0][1] = "Monday"
@@ -34,9 +28,6 @@ def index():
        crns.append(id)
        titles.append(getTitle(id))
        times.append(getDayTimes(id))
-
-    # # times.append(getDayTimes(id))
-    # locations.append(getLoc(id))
     # gross hardcode ends
 
     return render_template("index.html",
@@ -48,13 +39,11 @@ def index():
                            crns=crns,
                            times=times)
 
+# demo page hardcoded too
 @app.route('/demo')
+
 def demo():
     user = {'nickname': 'Alice'}  # fake user
-
-
-    # allcourses = scrape.BrowserScraper().getAllCourses()
-
     Matrix = [[ "-" for x in range(6)] for x in range(17)]
     Matrix[0][0] = "-"
     Matrix[0][1] = "Monday"
@@ -83,9 +72,6 @@ def demo():
        crns.append(id)
        titles.append(getTitle(id))
        times.append(getDayTimes(id))
-
-    # # times.append(getDayTimes(id))
-    # locations.append(getLoc(id))
     # gross hardcode ends
 
     return render_template("index.html",
