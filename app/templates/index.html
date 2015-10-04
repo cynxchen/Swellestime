@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<style>
+  #scrollb {
+    border-style: dotted;
+    padding: 20px;
+  }
+</style>
+
+    <h1 style = "text-align: center; background-color: #CCFFFF">Hi, {{ user.nickname }}!</h1>
+    <div id="scrollb" style="overflow-y: scroll; height:400px;">
+      <table>
+        {% for num in range (0, 762) %}
+        <tr>
+          <td> {{crns[num]}} </td>
+          <td> {{titles[num]}} </td>
+          <td> {{times[num]}} </td>
+          <td> <button style = "background-color:lightgreen">Add</button>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div>
+      <table style="width:100%; padding: 20px">
+        {% for row in range (0, 17) %}
+        <tr bgcolor="#66ccff">
+          {% for col in range (0, 6) %}
+          <th>{{ Matrix[row][col] }}</th>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+
+{% endblock %}

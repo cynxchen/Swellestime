@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hull timetables</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}"
+          rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='select2/select2.css') }}"
+          rel="stylesheet" media="screen">
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='select2/select2.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                $("#modules").select2({dropdownAutoWidth:true, width:"100%", closeOnSelect:false});
+                $("#department").select2();
+            }
+            {% if form.modules.choices %}
+            $("#searchForm").on("submit", function(e){
+                document.location = "{{ url_for('timetable') }}?modules=" + $("#modules").val().join(",");
+                e.preventDefault();
+            });
+            {% endif %}
+        })
+    </script>
+
+    <style>
+        body {
+            padding-top: 65px;
+        }
+    </style>
+</head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="/">Hull Timetables</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+
+            <form method="GET" role="form" id="searchForm" class="form-horizontal"
+              action="{% if form.modules.choices %}/timetable{% else %}/{% endif %}">
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="department">Department</label>
+                <div class="col-lg-10">
+                    {% if department %}{{ department.name }}{% else %}{{ form.department() }}{% endif %}
+                </div>
+            </div>
+            {% if form.modules.choices %}
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" for="modules">Modules</label>
+                    <div class="col-lg-10">
+                        {{ form.modules() }}
+                    </div>
+                </div>
+            {% endif %}
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      {% if department %}<a href="/" class="btn btn-default">Back</a>{% endif %}
+                    </div>
+              </div>
+            </form>
+        </div>
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', '{{ config.ANALYTICS_ID }}', 'tomforb.es');
+          ga('send', 'pageview');
+        </script>
+
+    </body>
+</html>

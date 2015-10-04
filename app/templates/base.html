@@ -1,0 +1,26 @@
+
+
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Megrim' rel='stylesheet' type='text/css'>
+    {% if title %}
+    <title>{{ title }} - WHACK</title>
+    {% else %}
+    <title>Welcome to WHACK</title>
+    {% endif %}
+  </head>
+  <body style = "font-family: 'Source Sans Pro', sans-serif">
+    <div> WHACK:   <a href="/index">  Home </a>   <a href = "/demo">  Example </a></div>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </body>
+</html>
